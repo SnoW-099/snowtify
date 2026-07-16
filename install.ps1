@@ -6,6 +6,25 @@ $snowtifyFolderPath = "$env:LOCALAPPDATA\snowtify"
 #endregion Variables
 
 #region Functions
+function Show-SnowtifyBanner {
+  [CmdletBinding()]
+  param ()
+  process {
+    $snowflake = [char]0x2744
+
+    Write-Host
+    Write-Host -Object '  +------------------------------------------+' -ForegroundColor 'Cyan'
+    Write-Host -Object '  |                                          |' -ForegroundColor 'Cyan'
+    Write-Host -Object '  |              ' -ForegroundColor 'Cyan' -NoNewline
+    Write-Host -Object "$snowflake  SNOWTIFY  $snowflake" -ForegroundColor 'White' -NoNewline
+    Write-Host -Object '              |' -ForegroundColor 'Cyan'
+    Write-Host -Object '  |                                          |' -ForegroundColor 'Cyan'
+    Write-Host -Object '  |                by SnoW099                |' -ForegroundColor 'DarkGray'
+    Write-Host -Object '  +------------------------------------------+' -ForegroundColor 'Cyan'
+    Write-Host
+  }
+}
+
 function Write-Success {
   [CmdletBinding()]
   param ()
@@ -137,6 +156,8 @@ function Install-Snowtify {
 #endregion Functions
 
 #region Main
+Show-SnowtifyBanner
+
 #region Checks
 if (-not (Test-PowerShellVersion)) {
   Write-Unsuccess
