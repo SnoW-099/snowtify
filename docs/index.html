@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="assets/snowtify-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
     <script src="app.js" defer></script>
@@ -35,10 +35,10 @@
     <main>
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow"><span></span> Snowtify for Windows</p>
+          <p class="eyebrow"><span></span> Built for Spotify on Windows</p>
           <h1 id="hero-title">Snowtify</h1>
           <p class="hero-lead">Your Spotify, below zero.</p>
-          <p class="hero-description">Themes, extensions, and a simple way to bring everything back after every update.</p>
+          <p class="hero-description">A focused command-line toolkit for themes, extensions, custom apps, and reliable recovery after Spotify updates.</p>
           <div class="hero-actions">
             <a class="primary-button" href="docs.html"><i data-lucide="book-open"></i> Read the docs</a>
             <a class="secondary-button" href="https://github.com/SnoW-099/snowtify/releases/latest" target="_blank" rel="noreferrer">Download <i data-lucide="arrow-up-right"></i></a>
@@ -54,13 +54,26 @@
           <div class="window-bar"><span></span><span></span><span></span><p>Spotify · Marketplace</p></div>
           <img src="assets/showcase/marketplace.png" alt="Theme and extension Marketplace inside Spotify" />
         </div>
-        <p class="compatibility"><i data-lucide="shield-check"></i> Windows 10/11 <span></span> Marketplace compatible <span></span> Open source</p>
       </section>
 
-      <section class="feature-strip" id="features" aria-label="Main features">
-        <article><span>01</span><i data-lucide="palette"></i><h2>Themes</h2><p>Change every color, detail, and surface in Spotify.</p></article>
-        <article><span>02</span><i data-lucide="blocks"></i><h2>Extensions</h2><p>Add controls and features connected to the player.</p></article>
-        <article><span>03</span><i data-lucide="wrench"></i><h2>Repair</h2><p>Restore your customization after an update.</p></article>
+      <section class="product-facts" aria-label="Product details">
+          <p><span>Current release</span><strong>v2.44.0-snow.2</strong></p>
+          <p><span>Windows builds</span><strong>x64 · ARM64 · x32</strong></p>
+          <p><span>Compatibility</span><strong>Marketplace ready</strong></p>
+          <p><span>License</span><strong>Open source</strong></p>
+      </section>
+
+      <section class="features-section" id="features" aria-labelledby="features-title">
+        <header class="section-intro">
+          <p class="section-label">The essentials</p>
+          <h2 id="features-title">Everything you need.<br />Nothing you don't.</h2>
+          <p>Snowtify keeps the familiar ecosystem while making installation and recovery feel dependable.</p>
+        </header>
+        <div class="feature-strip" aria-label="Main features">
+          <article><span>01</span><i data-lucide="palette"></i><h3>Themes</h3><p>Change every color, detail, and surface in Spotify.</p></article>
+          <article><span>02</span><i data-lucide="blocks"></i><h3>Extensions</h3><p>Add controls and features connected to the player.</p></article>
+          <article><span>03</span><i data-lucide="wrench"></i><h3>Repair</h3><p>Restore your customization after an update.</p></article>
+        </div>
       </section>
 
       <section class="repair-section">
@@ -70,10 +83,18 @@
           <p>If Spotify updates or fails to start correctly, Snowtify checks its state, rebuilds what is needed, and reapplies your configuration.</p>
           <div class="repair-command"><code id="repair-command">snowtify repair</code><button type="button" data-copy-target="repair-command" aria-label="Copy command"><i data-lucide="copy"></i></button></div>
         </div>
-        <div class="repair-visual" aria-hidden="true">
-          <div class="status-ring"><i data-lucide="check"></i></div>
-          <strong>Spotify restored</strong>
-          <span>Themes and extensions applied</span>
+        <div class="repair-console" aria-label="Successful Snowtify repair status">
+          <header>
+            <div><span class="status-dot"></span><strong>System recovery</strong></div>
+            <code>snowtify repair</code>
+          </header>
+          <div class="repair-steps">
+            <p><span><i data-lucide="check"></i> Spotify installation</span><strong>Found</strong></p>
+            <p><span><i data-lucide="check"></i> Backup integrity</span><strong>Verified</strong></p>
+            <p><span><i data-lucide="check"></i> Custom assets</span><strong>Restored</strong></p>
+            <p><span><i data-lucide="check"></i> Marketplace bridge</span><strong>Ready</strong></p>
+          </div>
+          <footer><span><i data-lucide="shield-check"></i> Recovery complete</span><time>2.4s</time></footer>
         </div>
       </section>
 
