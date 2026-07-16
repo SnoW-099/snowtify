@@ -289,6 +289,6 @@ func CheckUpdate(version string) {
 
 	if latestTag != version {
 		utils.PrintInfo("New version available: v" + latestTag + " (currently on: v" + version + ")")
-		utils.PrintInfo(`Run "spicetify update" or use a package manager to update spicetify`)
+		utils.PrintInfo(`Run "snowtify update" or use a package manager to update Snowtify`)
 	}
 }

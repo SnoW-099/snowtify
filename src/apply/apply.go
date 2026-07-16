@@ -67,7 +67,7 @@ func AdditionalOptions(appsFolderPath string, flags Flag) {
 			}
 		} else {
 			utils.PrintError("Spotify version mismatch with Spicetify. Please report it on our github repository.")
-			utils.PrintInfo("Spicetify might have been updated for this version already. Please run `spicetify update` to check for a new version.")
+			utils.PrintInfo("Snowtify might have been updated for this version already. Please run `snowtify update` to check for a new version.")
 			utils.PrintInfo("If one isn't available yet, please wait for an update to be released or downgrade Spotify to a supported version.")
 		}
 	}
@@ -382,7 +382,7 @@ func insertCustomApp(jsPath string, flags Flag) {
 
 		if (len(reactSymbs) < 3) || (len(eleSymbs) < 3) {
 			utils.PrintError("Spotify version mismatch with Spicetify. Please report it on our github repository.")
-			utils.PrintInfo("Spicetify might have been updated for this version already. Please run `spicetify update` to check for a new version.")
+			utils.PrintInfo("Snowtify might have been updated for this version already. Please run `snowtify update` to check for a new version.")
 			utils.PrintInfo("If one isn't available yet, please wait for an update to be released or downgrade Spotify to a supported version.")
 			return content
 		}

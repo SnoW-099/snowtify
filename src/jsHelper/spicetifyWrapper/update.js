@@ -11,7 +11,7 @@ void (async function checkForUpdate() {
   // Fetch latest version from GitHub
   try {
     let changelog;
-    const res = await fetch("https://api.github.com/repos/spicetify/cli/releases/latest");
+    const res = await fetch("https://api.github.com/repos/SnoW-099/snowtify/releases/latest");
     const { tag_name, html_url, body } = await res.json();
     const semver = tag_name.slice(1);
     const changelogRawDataOld = body.match(/## What's Changed([\s\S]*?)\r\n\r/)?.[1];
@@ -103,7 +103,7 @@ void (async function checkForUpdate() {
 				<p>Run these commands in the terminal:</p>
 				<ol>
 					<li>Update Spicetify CLI</li>
-					<pre class="spicetify-update-little-space">spicetify update</pre>
+					<pre class="spicetify-update-little-space">snowtify update</pre>
 					<p>Spicetify will automatically apply changes to Spotify after upgrading to the latest version.</p>
 					<p>If you installed Spicetify via a package manager, update using said package manager.</p>
 				</ol>

@@ -2,8 +2,7 @@ $ErrorActionPreference = 'Stop'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 #region Variables
-$spicetifyFolderPath = "$env:LOCALAPPDATA\spicetify"
-$spicetifyOldFolderPath = "$HOME\spicetify-cli"
+$snowtifyFolderPath = "$env:LOCALAPPDATA\snowtify"
 #endregion Variables
 
 #region Functions
@@ -47,20 +46,7 @@ function Test-PowerShellVersion {
   }
 }
 
-function Move-OldSpicetifyFolder {
-  [CmdletBinding()]
-  param ()
-  process {
-    if (Test-Path -Path $spicetifyOldFolderPath) {
-      Write-Host -Object 'Moving the old spicetify folder...' -NoNewline
-      Copy-Item -Path "$spicetifyOldFolderPath\*" -Destination $spicetifyFolderPath -Recurse -Force
-      Remove-Item -Path $spicetifyOldFolderPath -Recurse -Force
-      Write-Success
-    }
-  }
-}
-
-function Get-Spicetify {
+function Get-Snowtify {
   [CmdletBinding()]
   param ()
   begin {
@@ -74,28 +60,28 @@ function Get-Spicetify {
       $architecture = 'x32'
     }
     if ($v) {
-      if ($v -match '^\d+\.\d+\.\d+$') {
+      if ($v -match '^\d+\.\d+\.\d+(?:-snow\.\d+)?$') {
         $targetVersion = $v
       }
       else {
-        Write-Warning -Message "You have specified an invalid spicetify version: $v `nThe version must be in the following format: 1.2.3"
+        Write-Warning -Message "You have specified an invalid Snowtify version: $v `nUse a version such as 2.44.0-snow.1"
         Pause
         exit
       }
     }
     else {
-      Write-Host -Object 'Fetching the latest spicetify version...' -NoNewline
-      $latestRelease = Invoke-RestMethod -Uri 'https://api.github.com/repos/spicetify/cli/releases/latest'
-      $targetVersion = $latestRelease.tag_name -replace 'v', ''
+      Write-Host -Object 'Fetching the latest Snowtify version...' -NoNewline
+      $latestRelease = Invoke-RestMethod -Uri 'https://api.github.com/repos/SnoW-099/snowtify/releases/latest'
+      $targetVersion = $latestRelease.tag_name -replace '^v', ''
       Write-Success
     }
-    $archivePath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "spicetify.zip")
+    $archivePath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "snowtify.zip")
   }
   process {
-    Write-Host -Object "Downloading spicetify v$targetVersion..." -NoNewline
+    Write-Host -Object "Downloading Snowtify v$targetVersion..." -NoNewline
     $Parameters = @{
-      Uri            = "https://github.com/spicetify/cli/releases/download/v$targetVersion/spicetify-$targetVersion-windows-$architecture.zip"
-      UseBasicParsin = $true
+      Uri            = "https://github.com/SnoW-099/snowtify/releases/download/v$targetVersion/snowtify-$targetVersion-windows-$architecture.zip"
+      UseBasicParsing = $true
       OutFile        = $archivePath
     }
     Invoke-WebRequest @Parameters
@@ -106,45 +92,46 @@ function Get-Spicetify {
   }
 }
 
-function Add-SpicetifyToPath {
+function Add-SnowtifyToPath {
   [CmdletBinding()]
   param ()
   begin {
-    Write-Host -Object 'Making spicetify available in the PATH...' -NoNewline
+    Write-Host -Object 'Making Snowtify available in the PATH...' -NoNewline
     $user = [EnvironmentVariableTarget]::User
     $path = [Environment]::GetEnvironmentVariable('PATH', $user)
   }
   process {
-    $path = $path -replace "$([regex]::Escape($spicetifyOldFolderPath))\\*;*", ''
-    if ($path -notlike "*$spicetifyFolderPath*") {
-      $path = "$path;$spicetifyFolderPath"
+    if ($path -notlike "*$snowtifyFolderPath*") {
+      $path = "$path;$snowtifyFolderPath"
     }
   }
   end {
     [Environment]::SetEnvironmentVariable('PATH', $path, $user)
-    if (($env:PATH -split ';') -notcontains $spicetifyFolderPath) {
-      $env:PATH = "$env:PATH;$spicetifyFolderPath"
+    if (($env:PATH -split ';') -notcontains $snowtifyFolderPath) {
+      $env:PATH = "$env:PATH;$snowtifyFolderPath"
     }
     Write-Success
   }
 }
 
-function Install-Spicetify {
+function Install-Snowtify {
   [CmdletBinding()]
   param ()
   begin {
-    Write-Host -Object 'Installing spicetify...'
+    Write-Host -Object 'Installing Snowtify...'
   }
   process {
-    $archivePath = Get-Spicetify
-    Write-Host -Object 'Extracting spicetify...' -NoNewline
-    Expand-Archive -Path $archivePath -DestinationPath $spicetifyFolderPath -Force
+    $archivePath = Get-Snowtify
+    Write-Host -Object 'Extracting Snowtify...' -NoNewline
+    Expand-Archive -Path $archivePath -DestinationPath $snowtifyFolderPath -Force
+    Set-Content -Path "$snowtifyFolderPath\spicetify.cmd" -Encoding 'ASCII' -Value '@echo off
+"%~dp0snowtify.exe" %*'
     Write-Success
-    Add-SpicetifyToPath
+    Add-SnowtifyToPath
   }
   end {
     Remove-Item -Path $archivePath -Force -ErrorAction 'SilentlyContinue'
-    Write-Host -Object 'spicetify was successfully installed!' -ForegroundColor 'Green'
+    Write-Host -Object 'Snowtify was successfully installed!' -ForegroundColor 'Green'
   }
 }
 #endregion Functions
@@ -175,7 +162,7 @@ if (-not (Test-Admin)) {
   )
   $choice = $Host.UI.PromptForChoice('', 'Do you want to abort the installation process?', $choices, 0)
   if ($choice -eq 0) {
-    Write-Host -Object 'spicetify installation aborted' -ForegroundColor 'Yellow'
+    Write-Host -Object 'Snowtify installation aborted' -ForegroundColor 'Yellow'
     Pause
     exit
   }
@@ -185,26 +172,25 @@ else {
 }
 #endregion Checks
 
-#region Spicetify
-Move-OldSpicetifyFolder
-Install-Spicetify
+#region Snowtify
+Install-Snowtify
 Write-Host -Object "`nRun" -NoNewline
-Write-Host -Object ' spicetify -h ' -NoNewline -ForegroundColor 'Cyan'
+Write-Host -Object ' snowtify -h ' -NoNewline -ForegroundColor 'Cyan'
 Write-Host -Object 'to get started'
-#endregion Spicetify
+#endregion Snowtify
 
 #region Marketplace
 $Host.UI.RawUI.Flushinputbuffer()
 $choices = [System.Management.Automation.Host.ChoiceDescription[]] @(
-    (New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", "Install Spicetify Marketplace."),
+    (New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", "Install Spicetify Marketplace (compatible with Snowtify)."),
     (New-Object System.Management.Automation.Host.ChoiceDescription "&No", "Do not install Spicetify Marketplace.")
 )
 $choice = $Host.UI.PromptForChoice('', "`nDo you also want to install Spicetify Marketplace? It will become available within the Spotify client, where you can easily install themes and extensions.", $choices, 0)
 if ($choice -eq 1) {
-  Write-Host -Object 'spicetify Marketplace installation aborted' -ForegroundColor 'Yellow'
+  Write-Host -Object 'Spicetify Marketplace installation aborted' -ForegroundColor 'Yellow'
 }
 else {
-  Write-Host -Object 'Starting the spicetify Marketplace installation script..'
+  Write-Host -Object 'Starting the Spicetify Marketplace installation script...'
   $Parameters = @{
     Uri             = 'https://raw.githubusercontent.com/spicetify/spicetify-marketplace/main/resources/install.ps1'
     UseBasicParsing = $true

@@ -24,6 +24,12 @@ var (
 	version string
 )
 
+const (
+	productName = "Snowtify"
+	commandName = "snowtify"
+	projectURL  = "https://github.com/SnoW-099/snowtify"
+)
+
 var (
 	flags            = []string{}
 	commands         = []string{}
@@ -271,7 +277,7 @@ func main() {
 
 	cmd.InitPaths()
 
-	utils.PrintBold("spicetify v" + version)
+	utils.PrintBold(productName + " v" + version)
 	if slices.Contains(commands, "upgrade") || slices.Contains(commands, "update") {
 		updateStatus := cmd.Update(version)
 		spotifyPath := filepath.Join(cmd.GetSpotifyPath(), "Apps")
@@ -349,13 +355,13 @@ func main() {
 		case "restart":
 			cmd.SpotifyRestart()
 
-		case "auto":
+		case "auto", "repair":
 			cmd.Auto(version)
 			shouldRestart = true
 
 		default:
 			utils.Fatal(errors.New(`Command "` + v + `" not found.
-Run "spicetify -h" for a list of valid commands.`))
+Run "` + commandName + ` -h" for a list of valid commands.`))
 		}
 	}
 
@@ -365,10 +371,10 @@ Run "spicetify -h" for a list of valid commands.`))
 }
 
 func help() {
-	utils.PrintBold("spicetify v" + version)
+	utils.PrintBold(productName + " v" + version)
 	log.Println(utils.Bold("USAGE") + "\n" +
-		"spicetify [-q] [-e] [-a] \x1B[4mcommand\033[0m...\n" +
-		"spicetify {-c | --config} | {-v | --version} | {-h | --help}\n\n" +
+		commandName + " [-q] [-e] [-a] \x1B[4mcommand\033[0m...\n" +
+		commandName + " {-c | --config} | {-v | --version} | {-h | --help}\n\n" +
 		utils.Bold("DESCRIPTION") + "\n" +
 		"Customize Spotify client UI and functionality\n\n" +
 		utils.Bold("CHAINABLE COMMANDS") + `
@@ -395,6 +401,9 @@ watch               Enter watch mode.
 
 
 restart             Restart Spotify client.
+
+repair              Detect a Spotify update or missing customization,
+                    rebuild the backup when needed, apply Snowtify, and restart Spotify.
 
 ` + utils.Bold("NON-CHAINABLE COMMANDS") + `
 spotify-updates     Block Spotify updates by patching spotify executable.
@@ -500,8 +509,8 @@ upgrade|update      Update spicetify to the latest version if an update is avail
 
 -v, --version       Print version number and quit
 
-For config information, run "spicetify -h config".
-For more information and reporting bugs: https://github.com/spicetify/cli/`)
+For config information, run "` + commandName + ` -h config".
+For more information and reporting bugs: ` + projectURL + `/`)
 }
 
 func helpConfig() {
