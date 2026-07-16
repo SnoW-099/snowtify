@@ -24,7 +24,7 @@ iwr -useb https://raw.githubusercontent.com/SnoW-099/snowtify/main/install.ps1 |
 
 After installation, use `snowtify -h` to see the available commands.
 
-Visit the [Snowtify website](https://snow-099.github.io/snowtify/) for the visual guide, showcase, and command reference.
+The Snowtify website is deployed from the `codex/website` branch through Netlify.
 
 <img src=".github/assets/logo.png" alt="img" align="right" width="560px" height="400px">
 
