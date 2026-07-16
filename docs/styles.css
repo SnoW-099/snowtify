@@ -71,6 +71,7 @@ svg { width: 18px; height: 18px; stroke-width: 1.8; flex: 0 0 auto; }
 .install-pill code { overflow: hidden; color: var(--muted); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
 .install-pill button, .repair-command button { display: grid; place-items: center; width: 34px; height: 34px; border: 0; background: transparent; border-radius: 6px; cursor: pointer; }
 .install-pill button:hover, .repair-command button:hover { background: var(--surface-soft); color: var(--ice); }
+.install-pill:target { border-color: var(--ice); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ice) 12%, transparent); }
 .product-stage { position: relative; z-index: 2; width: min(1200px, 100%); aspect-ratio: 3 / 1; margin-top: 36px; overflow: hidden; border: 1px solid #363c41; background: #101316; border-radius: 8px 8px 0 0; box-shadow: 0 32px 80px var(--shadow); }
 .window-bar { height: 38px; display: flex; align-items: center; gap: 7px; padding: 0 13px; border-bottom: 1px solid #292e33; background: #15181b; }
 .window-bar span { width: 8px; height: 8px; border-radius: 50%; background: #51575d; }
