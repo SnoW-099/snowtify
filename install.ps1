@@ -181,8 +181,18 @@ function Install-SnowtifyLayer {
       throw 'Snowtify could not configure the Frost visual layer.'
     }
 
+    $snowtifyStatePath = if ($env:SPICETIFY_STATE) { $env:SPICETIFY_STATE } else { "$env:APPDATA\spicetify" }
+    $backupPath = "$snowtifyStatePath\Backup"
+    $hasBackup = (Test-Path -LiteralPath $backupPath -PathType 'Container') -and
+      [bool](Get-ChildItem -LiteralPath $backupPath -Force -ErrorAction 'SilentlyContinue' | Select-Object -First 1)
+
     Write-Host -Object 'Applying the Snowtify layer to Spotify...'
-    & "$snowtifyFolderPath\snowtify.exe" backup apply
+    if ($hasBackup) {
+      & "$snowtifyFolderPath\snowtify.exe" restore backup apply
+    }
+    else {
+      & "$snowtifyFolderPath\snowtify.exe" backup apply
+    }
     if ($LASTEXITCODE -ne 0) {
       throw 'Snowtify could not apply the Frost visual layer.'
     }
