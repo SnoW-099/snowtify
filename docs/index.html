@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Snowtify personaliza Spotify desde PowerShell con temas, extensiones y reparación automática." />
+    <meta name="description" content="Customize Spotify from PowerShell with themes, extensions, and automatic recovery." />
     <meta name="theme-color" content="#050607" />
     <meta property="og:image" content="assets/snowtify-icon.png" />
-    <title>Snowtify | Tu Spotify, bajo cero</title>
+    <title>Snowtify | Your Spotify, below zero</title>
     <link rel="icon" type="image/png" href="assets/snowtify-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,85 +17,85 @@
   </head>
   <body>
     <header class="topbar">
-      <a class="brand" href="index.html" aria-label="Snowtify, inicio">
+      <a class="brand" href="index.html" aria-label="Snowtify home">
         <span class="brand-mark"><img src="assets/snowtify-icon.png" alt="" /></span>
         <span>Snowtify</span>
       </a>
-      <nav class="topnav" aria-label="Navegación principal">
-        <a href="#features">Funciones</a>
-        <a href="#themes">Temas</a>
-        <a href="docs.html">Documentación</a>
+      <nav class="topnav" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#themes">Themes</a>
+        <a href="docs.html">Documentation</a>
       </nav>
       <div class="top-actions">
-        <button class="icon-button" id="theme-toggle" type="button" aria-label="Cambiar tema" title="Cambiar tema"><i data-lucide="sun"></i></button>
-        <a class="nav-cta" href="docs.html">Empezar <i data-lucide="arrow-right"></i></a>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="Change theme" title="Change theme"><i data-lucide="sun"></i></button>
+        <a class="nav-cta" href="docs.html">Get started <i data-lucide="arrow-right"></i></a>
       </div>
     </header>
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow"><span></span> Snowtify para Windows</p>
+          <p class="eyebrow"><span></span> Snowtify for Windows</p>
           <h1 id="hero-title">Snowtify</h1>
-          <p class="hero-lead">Tu Spotify, bajo cero.</p>
-          <p class="hero-description">Temas, extensiones y una forma sencilla de recuperarlo todo después de cada actualización.</p>
+          <p class="hero-lead">Your Spotify, below zero.</p>
+          <p class="hero-description">Themes, extensions, and a simple way to bring everything back after every update.</p>
           <div class="hero-actions">
-            <a class="primary-button" href="docs.html"><i data-lucide="book-open"></i> Ver documentación</a>
-            <a class="secondary-button" href="https://github.com/SnoW-099/snowtify/releases/latest" target="_blank" rel="noreferrer">Descargar <i data-lucide="arrow-up-right"></i></a>
+            <a class="primary-button" href="docs.html"><i data-lucide="book-open"></i> Read the docs</a>
+            <a class="secondary-button" href="https://github.com/SnoW-099/snowtify/releases/latest" target="_blank" rel="noreferrer">Download <i data-lucide="arrow-up-right"></i></a>
           </div>
-          <div class="install-pill" aria-label="Comando de instalación">
+          <div class="install-pill" aria-label="Installation command">
             <i data-lucide="terminal"></i>
             <code id="install-command">iwr -useb https://raw.githubusercontent.com/SnoW-099/snowtify/main/install.ps1 | iex</code>
-            <button type="button" data-copy-target="install-command" aria-label="Copiar comando" title="Copiar comando"><i data-lucide="copy"></i></button>
+            <button type="button" data-copy-target="install-command" aria-label="Copy command" title="Copy command"><i data-lucide="copy"></i></button>
           </div>
         </div>
 
-        <div class="product-stage" aria-label="Snowtify dentro de Spotify">
+        <div class="product-stage" aria-label="Snowtify inside Spotify">
           <div class="window-bar"><span></span><span></span><span></span><p>Spotify · Marketplace</p></div>
-          <img src="assets/showcase/marketplace.png" alt="Marketplace de temas y extensiones dentro de Spotify" />
+          <img src="assets/showcase/marketplace.png" alt="Theme and extension Marketplace inside Spotify" />
         </div>
-        <p class="compatibility"><i data-lucide="shield-check"></i> Windows 10/11 <span></span> Marketplace compatible <span></span> Código abierto</p>
+        <p class="compatibility"><i data-lucide="shield-check"></i> Windows 10/11 <span></span> Marketplace compatible <span></span> Open source</p>
       </section>
 
-      <section class="feature-strip" id="features" aria-label="Funciones principales">
-        <article><span>01</span><i data-lucide="palette"></i><h2>Temas</h2><p>Cambia cada color, detalle y superficie de Spotify.</p></article>
-        <article><span>02</span><i data-lucide="blocks"></i><h2>Extensiones</h2><p>Añade controles y funciones conectadas al reproductor.</p></article>
-        <article><span>03</span><i data-lucide="wrench"></i><h2>Repair</h2><p>Recupera tu personalización después de una actualización.</p></article>
+      <section class="feature-strip" id="features" aria-label="Main features">
+        <article><span>01</span><i data-lucide="palette"></i><h2>Themes</h2><p>Change every color, detail, and surface in Spotify.</p></article>
+        <article><span>02</span><i data-lucide="blocks"></i><h2>Extensions</h2><p>Add controls and features connected to the player.</p></article>
+        <article><span>03</span><i data-lucide="wrench"></i><h2>Repair</h2><p>Restore your customization after an update.</p></article>
       </section>
 
       <section class="repair-section">
         <div class="repair-copy">
-          <p class="section-label">Diseñado para volver</p>
-          <h2>Un comando.<br />Todo en su sitio.</h2>
-          <p>Si Spotify se actualiza o arranca mal, Snowtify comprueba el estado, reconstruye lo necesario y aplica de nuevo tu configuración.</p>
-          <div class="repair-command"><code id="repair-command">snowtify repair</code><button type="button" data-copy-target="repair-command" aria-label="Copiar comando"><i data-lucide="copy"></i></button></div>
+          <p class="section-label">Built to come back</p>
+          <h2>One command.<br />Everything restored.</h2>
+          <p>If Spotify updates or fails to start correctly, Snowtify checks its state, rebuilds what is needed, and reapplies your configuration.</p>
+          <div class="repair-command"><code id="repair-command">snowtify repair</code><button type="button" data-copy-target="repair-command" aria-label="Copy command"><i data-lucide="copy"></i></button></div>
         </div>
         <div class="repair-visual" aria-hidden="true">
           <div class="status-ring"><i data-lucide="check"></i></div>
-          <strong>Spotify reparado</strong>
-          <span>Temas y extensiones aplicados</span>
+          <strong>Spotify restored</strong>
+          <span>Themes and extensions applied</span>
         </div>
       </section>
 
       <section class="themes-section" id="themes">
         <header>
-          <div><p class="section-label">Tu estilo</p><h2>Spotify, como tú quieras.</h2></div>
-          <p>Compatible con el ecosistema de temas y extensiones que ya conoces.</p>
+          <div><p class="section-label">Your style</p><h2>Spotify, your way.</h2></div>
+          <p>Compatible with the theme and extension ecosystem you already know.</p>
         </header>
         <div class="theme-grid">
-          <figure class="theme-large"><img src="assets/showcase/1.png" alt="Tema Pastel para Spotify" /><figcaption>Pastel</figcaption></figure>
-          <figure><img src="assets/showcase/2.png" alt="Tema Minimal para Spotify" /><figcaption>Minimal</figcaption></figure>
-          <figure><img src="assets/showcase/6.png" alt="Tema Electric para Spotify" /><figcaption>Electric</figcaption></figure>
+          <figure class="theme-large"><img src="assets/showcase/1.png" alt="Pastel theme for Spotify" /><figcaption>Pastel</figcaption></figure>
+          <figure><img src="assets/showcase/2.png" alt="Minimal theme for Spotify" /><figcaption>Minimal</figcaption></figure>
+          <figure><img src="assets/showcase/6.png" alt="Electric theme for Spotify" /><figcaption>Electric</figcaption></figure>
         </div>
       </section>
 
       <section class="final-cta">
         <img src="assets/snowtify-icon.png" alt="Icono de Snowtify" />
         <p class="section-label">v2.44.0-snow.2</p>
-        <h2>Haz Spotify tuyo.</h2>
-        <p>Instala Snowtify desde PowerShell y conserva tus temas, extensiones y configuración.</p>
+        <h2>Make Spotify yours.</h2>
+        <p>Install Snowtify from PowerShell and keep your themes, extensions, and configuration.</p>
         <div class="hero-actions">
-          <a class="primary-button" href="docs.html">Abrir documentación <i data-lucide="arrow-right"></i></a>
+          <a class="primary-button" href="docs.html">Open documentation <i data-lucide="arrow-right"></i></a>
           <a class="secondary-button" href="https://github.com/SnoW-099/snowtify" target="_blank" rel="noreferrer"><i data-lucide="github"></i> GitHub</a>
         </div>
       </section>
@@ -103,10 +103,10 @@
 
     <footer>
       <a class="brand" href="index.html"><span class="brand-mark"><img src="assets/snowtify-icon.png" alt="" /></span><span>Snowtify</span></a>
-      <p>Proyecto independiente de SnoW-099, basado en Spicetify CLI.</p>
-      <a href="docs.html">Documentación <i data-lucide="arrow-right"></i></a>
+      <p>An independent project by SnoW-099, based on Spicetify CLI.</p>
+      <a href="docs.html">Documentation <i data-lucide="arrow-right"></i></a>
     </footer>
-    <p class="asset-credit">Capturas adaptadas de <a href="https://github.com/spicetify/docs" target="_blank" rel="noreferrer">spicetify/docs</a> bajo LGPL-2.1.</p>
-    <div class="toast" id="toast" role="status" aria-live="polite"><i data-lucide="check"></i> Copiado</div>
+    <p class="asset-credit">Screenshots adapted from <a href="https://github.com/spicetify/docs" target="_blank" rel="noreferrer">spicetify/docs</a> under LGPL-2.1.</p>
+    <div class="toast" id="toast" role="status" aria-live="polite"><i data-lucide="check"></i> Copied</div>
   </body>
 </html>

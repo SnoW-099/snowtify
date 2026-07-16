@@ -13,7 +13,7 @@ function setTheme(theme) {
   localStorage.setItem("snowtify-theme", theme);
   if (themeToggle) {
     themeToggle.innerHTML = `<i data-lucide="${theme === "light" ? "moon" : "sun"}"></i>`;
-    themeToggle.setAttribute("aria-label", theme === "light" ? "Usar tema oscuro" : "Usar tema claro");
+    themeToggle.setAttribute("aria-label", theme === "light" ? "Use dark theme" : "Use light theme");
   }
   renderIcons();
 }
@@ -36,10 +36,10 @@ document.addEventListener("click", (event) => {
 themeToggle?.addEventListener("click", () => setTheme(root.classList.contains("light") ? "dark" : "light"));
 
 searchInput?.addEventListener("input", () => {
-  const query = searchInput.value.trim().toLocaleLowerCase("es");
+  const query = searchInput.value.trim().toLocaleLowerCase("en");
   let visible = 0;
   sections.forEach((section) => {
-    const content = `${section.dataset.search || ""} ${section.textContent}`.toLocaleLowerCase("es");
+    const content = `${section.dataset.search || ""} ${section.textContent}`.toLocaleLowerCase("en");
     const match = !query || content.includes(query);
     section.hidden = !match;
     if (match) visible += 1;
