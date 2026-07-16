@@ -17,7 +17,7 @@
   <body class="docs-page">
     <header class="topbar">
       <a class="brand" href="index.html"><span class="brand-mark"><img src="assets/snowtify-icon.png" alt="" /></span><span>Snowtify</span><span class="docs-badge">Docs</span></a>
-      <nav class="topnav"><a href="index.html">Home</a><a href="#install">Installation</a><a href="#commands">Commands</a></nav>
+      <nav class="topnav"><a href="index.html">Home</a><a href="#install">Installation</a><a href="#commands">Commands</a><a class="danger-link" href="#uninstall">Uninstall</a></nav>
       <div class="top-actions">
         <button class="icon-button" id="theme-toggle" type="button" aria-label="Change theme" title="Change theme"><i data-lucide="sun"></i></button>
         <a class="github-icon" href="https://github.com/SnoW-099/snowtify" target="_blank" rel="noreferrer" aria-label="GitHub"><i data-lucide="github"></i></a>
@@ -31,6 +31,7 @@
           <p>Getting started</p><a class="active" href="#install">Installation</a><a href="#first-run">First run</a>
           <p>Maintenance</p><a href="#repair">Repair</a><a href="#update">Update</a><a href="#marketplace">Marketplace</a>
           <p>Reference</p><a href="#commands">Commands</a><a href="#faq">Troubleshooting</a>
+          <p>Removal</p><a class="danger-link" href="#uninstall">Uninstall Snowtify</a>
         </nav>
       </aside>
 
@@ -79,6 +80,22 @@
           <div class="section-heading"><span>07</span><div><h2>Troubleshooting</h2><p>Quick fixes to try before opening an issue.</p></div></div>
           <details><summary>Snowtify disappeared after Spotify updated</summary><p>Run <code>snowtify repair</code>. If Spotify changed significantly, run <code>snowtify update</code> first.</p></details>
           <details><summary>Spotify opens with a frozen interface</summary><p>Temporarily disable the latest theme or extension you installed, then run <code>snowtify apply</code>.</p></details>
+        </section>
+
+        <section class="doc-section searchable uninstall-section" id="uninstall" data-search="uninstall remove delete restore cleanup powershell">
+          <div class="section-heading"><span>08</span><div><h2>Uninstall Snowtify</h2><p>Restore Spotify and remove Snowtify safely.</p></div></div>
+          <div class="uninstall-warning">
+            <i data-lucide="triangle-alert"></i>
+            <div><strong>Run this only if you want to remove Snowtify.</strong><p>The official uninstaller restores Spotify before deleting any Snowtify files.</p></div>
+          </div>
+          <div class="code-block uninstall-code">
+            <div class="code-title"><span>PowerShell</span><button type="button" data-copy-target="uninstall-command"><i data-lucide="copy"></i> Copy</button></div>
+            <pre><code id="uninstall-command">iwr -useb https://raw.githubusercontent.com/SnoW-099/snowtify/main/uninstall.ps1 | iex</code></pre>
+          </div>
+          <div class="removal-summary">
+            <p><i data-lucide="check"></i><span><strong>Removed</strong> Snowtify CLI, its PATH entry, and the Frost layer.</span></p>
+            <p><i data-lucide="shield-check"></i><span><strong>Preserved</strong> Your other themes, extensions, and Spicetify configuration.</span></p>
+          </div>
         </section>
         <div class="no-results" hidden><i data-lucide="search-x"></i><p>No matching section found.</p></div>
       </article>

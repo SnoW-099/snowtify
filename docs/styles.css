@@ -46,6 +46,7 @@ svg { width: 18px; height: 18px; stroke-width: 1.8; flex: 0 0 auto; }
 .docs-badge { padding-left: 10px; border-left: 1px solid var(--line); color: var(--muted); font-size: 14px; font-weight: 500; }
 .topnav { display: flex; align-items: center; gap: 30px; color: var(--muted); font-size: 13px; }
 .topnav a:hover { color: var(--text); }
+.topnav .danger-link, .docs-sidebar nav .danger-link { color: var(--coral); }
 .top-actions { justify-self: end; display: flex; align-items: center; gap: 8px; }
 .icon-button, .github-icon { display: grid; place-items: center; width: 36px; height: 36px; border: 0; background: transparent; border-radius: 7px; cursor: pointer; }
 .icon-button:hover, .github-icon:hover { background: var(--surface-soft); color: var(--ice); }
@@ -182,6 +183,18 @@ footer > a:last-child { justify-self: end; display: inline-flex; align-items: ce
 .note svg { margin-top: 3px; color: var(--coral); }
 .note p { margin: 0; color: var(--muted); font-size: 14px; }
 .note code, .doc-section p code, details code { color: var(--text); }
+.uninstall-section { position: relative; }
+.uninstall-section::before { content: ""; position: absolute; top: 0; left: 0; width: 52px; height: 2px; background: var(--coral); }
+.uninstall-section .section-heading > span { color: var(--coral); }
+.uninstall-warning { display: flex; gap: 13px; margin-bottom: 16px; padding: 17px 18px; border: 1px solid color-mix(in srgb, var(--coral) 34%, var(--line)); background: color-mix(in srgb, var(--coral) 7%, var(--surface)); border-radius: 8px; }
+.uninstall-warning > svg { margin-top: 2px; color: var(--coral); }
+.uninstall-warning strong { font-size: 14px; }
+.uninstall-warning p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+.uninstall-code { border-left: 3px solid var(--coral); }
+.removal-summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
+.removal-summary p { display: flex; align-items: flex-start; gap: 10px; margin: 0; padding: 15px; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; color: var(--muted); font-size: 12px; }
+.removal-summary svg { margin-top: 1px; color: var(--mint); }
+.removal-summary strong { display: block; margin-bottom: 2px; color: var(--text); font-size: 12px; }
 .command-table { border-top: 1px solid var(--line); }
 .table-row { display: grid; grid-template-columns: minmax(180px, 0.8fr) 1.4fr; gap: 30px; padding: 16px 12px; border-bottom: 1px solid var(--line); align-items: center; }
 .table-row:not(.table-head):hover { background: var(--surface); }
@@ -261,6 +274,7 @@ details p { padding: 0 4px 18px; color: var(--muted); }
   .code-block pre { font-size: 10px; }
   .table-row { grid-template-columns: 1fr; gap: 4px; }
   .table-head { display: none; }
+  .removal-summary { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
