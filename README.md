@@ -1,19 +1,28 @@
-<h3 align="center"><a href="https://spicetify.app/"><img src="https://i.imgur.com/iwcLITQ.png" width="600px"></a></h3>
-<p align="center">
-  <a href="https://goreportcard.com/report/github.com/spicetify/cli"><img src="https://goreportcard.com/badge/github.com/spicetify/cli"></a>
-  <a href="https://github.com/spicetify/cli/releases/latest"><img src="https://img.shields.io/github/release/spicetify/cli/all.svg?colorB=97CA00&label=latest%20version"></a>
-  <a href="https://github.com/spicetify/cli/releases"><img src="https://img.shields.io/github/downloads/spicetify/cli/total.svg?colorB=97CA00&label=total%20downloads"></a>
-  <a href="https://discord.gg/VnevqPp2Rr"><img src="https://img.shields.io/discord/842219447716151306?label=chat&logo=discord&logoColor=discord"></a>
-</p>
+# Snowtify
 
----
+Snowtify is a stability-focused fork of [Spicetify CLI](https://github.com/spicetify/cli), maintained by [SnoW-099](https://github.com/SnoW-099).
 
-Command-line tool to customize the official Spotify client.
-Supports Windows, MacOS and Linux.
+It customizes the official Spotify desktop client on Windows, macOS, and Linux while preserving compatibility with existing Spicetify themes, extensions, custom apps, Marketplace, and configuration files.
+
+## Snowtify additions
+
+- A clearer `snowtify repair` command for recovering customization after Spotify updates.
+- A compatibility-first approach so upstream Spicetify improvements can still be merged.
+- Upcoming startup diagnostics for themes and extensions that fail intermittently.
+
+## Install on Windows
+
+Open PowerShell as your normal user and run:
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/SnoW-099/snowtify/main/install.ps1 | iex
+```
+
+After installation, use `snowtify -h` to see the available commands.
 
 <img src=".github/assets/logo.png" alt="img" align="right" width="560px" height="400px">
 
-### Features
+## Features
 
 - Change colors across the User Interface
 - Inject CSS for advanced customization
@@ -21,13 +30,18 @@ Supports Windows, MacOS and Linux.
 - Inject Custom Apps
 - Make yourself in control of the Spotify client
 
-### Links
+## Compatibility
 
-- [Installation](https://spicetify.app/docs/getting-started)
-- [Basic Usage](https://spicetify.app/docs/getting-started#basic-usage)
+Snowtify intentionally keeps the internal `Spicetify` JavaScript API and existing configuration layout. Renaming those interfaces would break community themes and extensions.
+
+Until Snowtify publishes its first release, use the upstream [installation](https://spicetify.app/docs/getting-started) and [usage documentation](https://spicetify.app/docs/getting-started#basic-usage) for the shared commands.
+
+## Upstream
+
+This project is derived from [spicetify/cli](https://github.com/spicetify/cli) and remains licensed under the LGPL-2.1 license.
 
 ---
 
-### Code Signing Policy
+## Code Signing Policy
 
 Free code signing provided by [SignPath.io](https://signpath.io), certificate by [SignPath Foundation](https://signpath.org/).

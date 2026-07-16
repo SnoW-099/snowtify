@@ -20,13 +20,13 @@ func Update(currentVersion string) bool {
 		return false
 	}
 	if currentVersion == tagName {
-		utils.PrintSuccess("Spicetify is up-to-date.")
+		utils.PrintSuccess("Snowtify is up-to-date.")
 		return false
 	}
 
 	utils.PrintInfo("Latest release: " + tagName)
-	var assetURL string = "https://github.com/spicetify/cli/releases/download/v" + tagName + "/spicetify-" + tagName + "-" + runtime.GOOS + "-"
-	var location string = os.TempDir() + "/spicetify-" + tagName
+	var assetURL string = "https://github.com/SnoW-099/snowtify/releases/download/v" + tagName + "/snowtify-" + tagName + "-" + runtime.GOOS + "-"
+	var location string = os.TempDir() + "/snowtify-" + tagName
 
 	if runtime.GOARCH == "386" && runtime.GOOS == "windows" {
 		assetURL += "x32"
@@ -46,11 +46,11 @@ func Update(currentVersion string) bool {
 		location += ".tar.gz"
 	}
 
-	spinner, _ := utils.Spinner.Start("Downloading Spicetify")
+	spinner, _ := utils.Spinner.Start("Downloading Snowtify")
 
 	out, err := os.Create(location)
 	if err != nil {
-		spinner.Fail("Failed to download Spicetify")
+		spinner.Fail("Failed to download Snowtify")
 		utils.Fatal(err)
 	}
 	defer out.Close()
@@ -58,14 +58,14 @@ func Update(currentVersion string) bool {
 	resp2, err := http.Get(assetURL)
 	if err != nil {
 		out.Close()
-		spinner.Fail("Failed to download Spicetify")
+		spinner.Fail("Failed to download Snowtify")
 		utils.Fatal(err)
 	}
 
 	if resp2.StatusCode != http.StatusOK {
 		resp2.Body.Close()
 		out.Close()
-		spinner.Fail("Failed to download Spicetify")
+		spinner.Fail("Failed to download Snowtify")
 		utils.Fatal(fmt.Errorf("unexpected HTTP status: %s for %s", resp2.Status, assetURL))
 	}
 
@@ -75,10 +75,10 @@ func Update(currentVersion string) bool {
 	if err != nil {
 		resp2.Body.Close()
 		out.Close()
-		spinner.Fail("Failed to download Spicetify")
+		spinner.Fail("Failed to download Snowtify")
 		utils.Fatal(err)
 	}
-	spinner.Success("Downloaded Spicetify")
+	spinner.Success("Downloaded Snowtify")
 
 	exe, err := os.Executable()
 	if err != nil {
@@ -108,12 +108,12 @@ func Update(currentVersion string) bool {
 	}
 
 	utils.CheckExistAndDelete(exeOld)
-	utils.PrintSuccess("Successfully updated Spicetify to v" + tagName)
+	utils.PrintSuccess("Successfully updated Snowtify to v" + tagName)
 	return true
 }
 
 func permissionError(err error) {
-	utils.PrintInfo("If fatal error is \"Permission denied\", please check read/write permission of spicetify executable directory.")
-	utils.PrintInfo("However, if you used a package manager to install spicetify, please upgrade by using the same package manager.")
+	utils.PrintInfo("If fatal error is \"Permission denied\", please check read/write permission of the Snowtify executable directory.")
+	utils.PrintInfo("However, if you used a package manager to install Snowtify, please upgrade by using the same package manager.")
 	utils.Fatal(err)
 }
