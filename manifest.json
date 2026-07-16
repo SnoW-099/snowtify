@@ -40,5 +40,20 @@
 		"description": "Throw songs/artists to trash bin and never hear them again (automatically skip). This extension will append a Throw to Trashbin option in tracks and artists link right click menu.",
 		"preview": "https://i.imgur.com/ZFTy5Rm.png",
 		"main": "Extensions/trashbin.js"
+	},
+	{
+		"name": "Snowtify Frost",
+		"description": "A clean, dark Spotify theme with crisp ice-blue accents.",
+		"preview": "assets/snowtify-icon.png",
+		"usercss": "Themes/Snowtify/user.css",
+		"schemes": "Themes/Snowtify/color.ini",
+		"readme": "README.md",
+		"authors": [
+			{
+				"name": "SnoW099",
+				"url": "https://github.com/SnoW-099"
+			}
+		],
+		"tags": ["dark", "minimal", "blue"]
 	}
 ]

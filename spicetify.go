@@ -139,6 +139,9 @@ func init() {
 	utils.MigrateConfigFolder()
 	utils.MigrateFolders()
 	cmd.InitConfig(quiet)
+	if _, err := cmd.MigrateSnowtifyFrost(); err != nil {
+		utils.PrintWarning(err.Error())
+	}
 
 	if len(commands) < 1 {
 		help()

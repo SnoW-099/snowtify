@@ -19,6 +19,8 @@ if (Test-Path -LiteralPath $snowtifyExecutablePath -PathType 'Leaf') {
   if ($LASTEXITCODE -ne 0) {
     throw 'Spotify could not be restored. Snowtify was not removed.'
   }
+
+  & $snowtifyExecutablePath config extensions snowtify-frost.js- | Out-Null
 }
 else {
   Write-Host -Object 'Snowtify executable was not found; continuing with cleanup.' -ForegroundColor 'Yellow'

@@ -3,8 +3,10 @@ package utils
 import (
 	"encoding/json"
 	"errors"
-	"io"
+	"fmt"
 	"net/http"
+	"strings"
+	"time"
 )
 
 type GithubRelease struct {
@@ -13,18 +15,19 @@ type GithubRelease struct {
 }
 
 func FetchLatestTag() (string, error) {
-	res, err := http.Get("https://api.github.com/repos/SnoW-099/snowtify/releases/latest")
+	client := &http.Client{Timeout: 30 * time.Second}
+	res, err := client.Get("https://api.github.com/repos/SnoW-099/snowtify/releases/latest")
 	if err != nil {
 		return "", err
 	}
+	defer res.Body.Close()
 
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
-		return "", err
+	if res.StatusCode != http.StatusOK {
+		return "", fmt.Errorf("GitHub returned %s", res.Status)
 	}
 
 	var release GithubRelease
-	if err = json.Unmarshal(body, &release); err != nil {
+	if err = json.NewDecoder(res.Body).Decode(&release); err != nil {
 		return "", err
 	}
 
@@ -32,5 +35,5 @@ func FetchLatestTag() (string, error) {
 		return "", errors.New("GitHub response: " + release.Message)
 	}
 
-	return release.TagName[1:], nil
+	return strings.TrimPrefix(release.TagName, "v"), nil
 }

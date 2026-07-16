@@ -157,7 +157,10 @@ function Install-Snowtify {
 
 function Install-SnowtifyLayer {
   [CmdletBinding()]
-  param ()
+  param (
+    [Parameter(Mandatory = $true)]
+    [bool]$MarketplaceEnabled
+  )
   begin {
     $themeBaseUrl = 'https://raw.githubusercontent.com/SnoW-099/snowtify/main/Themes/Snowtify'
     Write-Host -Object 'Installing the Snowtify Frost visual layer...' -NoNewline
@@ -176,7 +179,16 @@ function Install-SnowtifyLayer {
     Write-Success
 
     Write-Host -Object 'Configuring Snowtify Frost as the active theme...'
-    & "$snowtifyFolderPath\snowtify.exe" config current_theme Snowtify color_scheme Frost inject_css 1 replace_colors 1
+    if ($MarketplaceEnabled) {
+      $bootstrapPath = "$snowtifyFolderPath\Extensions\snowtify-frost.js"
+      if (-not (Test-Path -LiteralPath $bootstrapPath -PathType 'Leaf')) {
+        throw 'This Snowtify release does not include Marketplace theme integration.'
+      }
+      & "$snowtifyFolderPath\snowtify.exe" config current_theme marketplace color_scheme Marketplace inject_css 1 replace_colors 1 extensions snowtify-frost.js
+    }
+    else {
+      & "$snowtifyFolderPath\snowtify.exe" config current_theme Snowtify color_scheme Frost inject_css 1 replace_colors 1
+    }
     if ($LASTEXITCODE -ne 0) {
       throw 'Snowtify could not configure the Frost visual layer.'
     }
@@ -249,6 +261,10 @@ Write-Host -Object 'to get started'
 #endregion Snowtify
 
 #region Marketplace
+$marketplaceAppPath = "$env:APPDATA\spicetify\CustomApps\marketplace"
+$marketplaceThemePath = "$env:APPDATA\spicetify\Themes\marketplace"
+$marketplaceInstalled = (Test-Path -LiteralPath $marketplaceAppPath -PathType 'Container') -and
+  (Test-Path -LiteralPath $marketplaceThemePath -PathType 'Container')
 $Host.UI.RawUI.Flushinputbuffer()
 $choices = [System.Management.Automation.Host.ChoiceDescription[]] @(
     (New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", "Install Spicetify Marketplace (compatible with Snowtify)."),
@@ -265,10 +281,12 @@ else {
     UseBasicParsing = $true
   }
   Invoke-WebRequest @Parameters | Invoke-Expression
+  $marketplaceInstalled = (Test-Path -LiteralPath $marketplaceAppPath -PathType 'Container') -and
+    (Test-Path -LiteralPath $marketplaceThemePath -PathType 'Container')
 }
 #endregion Marketplace
 
 #region Snowtify Layer
-Install-SnowtifyLayer
+Install-SnowtifyLayer -MarketplaceEnabled $marketplaceInstalled
 #endregion Snowtify Layer
 #endregion Main

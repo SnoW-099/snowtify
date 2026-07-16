@@ -8,6 +8,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"time"
 
 	"github.com/spicetify/cli/src/utils"
 )
@@ -55,7 +56,8 @@ func Update(currentVersion string) bool {
 	}
 	defer out.Close()
 
-	resp2, err := http.Get(assetURL)
+	client := &http.Client{Timeout: 5 * time.Minute}
+	resp2, err := client.Get(assetURL)
 	if err != nil {
 		out.Close()
 		spinner.Fail("Failed to download Snowtify")
@@ -76,6 +78,10 @@ func Update(currentVersion string) bool {
 		resp2.Body.Close()
 		out.Close()
 		spinner.Fail("Failed to download Snowtify")
+		utils.Fatal(err)
+	}
+	if err = out.Close(); err != nil {
+		spinner.Fail("Failed to save Snowtify")
 		utils.Fatal(err)
 	}
 	spinner.Success("Downloaded Snowtify")
