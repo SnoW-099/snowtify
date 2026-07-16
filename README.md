@@ -12,6 +12,7 @@ It customizes the official Spotify desktop client on Windows, macOS, and Linux w
 
 - A clearer `snowtify repair` command for recovering customization after Spotify updates.
 - The official `Snowtify Frost` theme is installed by default and managed from Marketplace's **Installed** tab, where it can be removed or replaced like any other theme.
+- Spotify shows a one-time Snowtify notification and update button only when a newer release is available.
 - A compatibility-first approach so upstream Spicetify improvements can still be merged.
 - Upcoming startup diagnostics for themes and extensions that fail intermittently.
 
