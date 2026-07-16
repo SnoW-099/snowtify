@@ -1,5 +1,9 @@
 # Snowtify
 
+<p align="center">
+  <img src="assets/snowtify-icon.png" width="128" alt="Snowtify icon" />
+</p>
+
 Snowtify is a stability-focused fork of [Spicetify CLI](https://github.com/spicetify/cli), maintained by [SnoW-099](https://github.com/SnoW-099).
 
 It customizes the official Spotify desktop client on Windows, macOS, and Linux while preserving compatibility with existing Spicetify themes, extensions, custom apps, Marketplace, and configuration files.
@@ -19,6 +23,8 @@ iwr -useb https://raw.githubusercontent.com/SnoW-099/snowtify/main/install.ps1 |
 ```
 
 After installation, use `snowtify -h` to see the available commands.
+
+Visit the [Snowtify website](https://snow-099.github.io/snowtify/) for the visual guide, showcase, and command reference.
 
 <img src=".github/assets/logo.png" alt="img" align="right" width="560px" height="400px">
 
