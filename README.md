@@ -11,6 +11,7 @@ It customizes the official Spotify desktop client on Windows, macOS, and Linux w
 ## Snowtify additions
 
 - A clearer `snowtify repair` command for recovering customization after Spotify updates.
+- The official `Snowtify / Frost` visual layer is installed and applied by default without removing Marketplace compatibility or existing themes.
 - A compatibility-first approach so upstream Spicetify improvements can still be merged.
 - Upcoming startup diagnostics for themes and extensions that fail intermittently.
 

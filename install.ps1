@@ -3,6 +3,7 @@ $ErrorActionPreference = 'Stop'
 
 #region Variables
 $snowtifyFolderPath = "$env:LOCALAPPDATA\snowtify"
+$snowtifyThemePath = "$env:APPDATA\spicetify\Themes\Snowtify"
 #endregion Variables
 
 #region Functions
@@ -153,6 +154,43 @@ function Install-Snowtify {
     Write-Host -Object 'Snowtify was successfully installed!' -ForegroundColor 'Green'
   }
 }
+
+function Install-SnowtifyLayer {
+  [CmdletBinding()]
+  param ()
+  begin {
+    $themeBaseUrl = 'https://raw.githubusercontent.com/SnoW-099/snowtify/main/Themes/Snowtify'
+    Write-Host -Object 'Installing the Snowtify Frost visual layer...' -NoNewline
+  }
+  process {
+    New-Item -Path $snowtifyThemePath -ItemType 'Directory' -Force | Out-Null
+
+    foreach ($themeFile in @('color.ini', 'user.css')) {
+      $Parameters = @{
+        Uri             = "$themeBaseUrl/$themeFile"
+        UseBasicParsing = $true
+        OutFile         = "$snowtifyThemePath\$themeFile"
+      }
+      Invoke-WebRequest @Parameters
+    }
+    Write-Success
+
+    Write-Host -Object 'Configuring Snowtify Frost as the active theme...'
+    & "$snowtifyFolderPath\snowtify.exe" config current_theme Snowtify color_scheme Frost inject_css 1 replace_colors 1
+    if ($LASTEXITCODE -ne 0) {
+      throw 'Snowtify could not configure the Frost visual layer.'
+    }
+
+    Write-Host -Object 'Applying the Snowtify layer to Spotify...'
+    & "$snowtifyFolderPath\snowtify.exe" backup apply
+    if ($LASTEXITCODE -ne 0) {
+      throw 'Snowtify could not apply the Frost visual layer.'
+    }
+  }
+  end {
+    Write-Host -Object 'Snowtify Frost is active.' -ForegroundColor 'Cyan'
+  }
+}
 #endregion Functions
 
 #region Main
@@ -219,4 +257,8 @@ else {
   Invoke-WebRequest @Parameters | Invoke-Expression
 }
 #endregion Marketplace
+
+#region Snowtify Layer
+Install-SnowtifyLayer
+#endregion Snowtify Layer
 #endregion Main
