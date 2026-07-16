@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Documentación oficial de Snowtify: instalación, reparación y comandos." />
+    <meta name="theme-color" content="#050607" />
+    <title>Documentación | Snowtify</title>
+    <link rel="icon" type="image/png" href="assets/snowtify-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body class="docs-page">
+    <header class="topbar">
+      <a class="brand" href="index.html"><span class="brand-mark"><img src="assets/snowtify-icon.png" alt="" /></span><span>Snowtify</span><span class="docs-badge">Docs</span></a>
+      <nav class="topnav"><a href="index.html">Inicio</a><a href="#install">Instalación</a><a href="#commands">Comandos</a></nav>
+      <div class="top-actions">
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="Cambiar tema" title="Cambiar tema"><i data-lucide="sun"></i></button>
+        <a class="github-icon" href="https://github.com/SnoW-099/snowtify" target="_blank" rel="noreferrer" aria-label="GitHub"><i data-lucide="github"></i></a>
+      </div>
+    </header>
+
+    <main class="docs-layout">
+      <aside class="docs-sidebar">
+        <label class="search-box" for="docs-search"><i data-lucide="search"></i><input id="docs-search" type="search" placeholder="Buscar" autocomplete="off" /></label>
+        <nav aria-label="Índice de documentación">
+          <p>Primeros pasos</p><a class="active" href="#install">Instalación</a><a href="#first-run">Primera ejecución</a>
+          <p>Mantenimiento</p><a href="#repair">Reparar</a><a href="#update">Actualizar</a><a href="#marketplace">Marketplace</a>
+          <p>Referencia</p><a href="#commands">Comandos</a><a href="#faq">Problemas comunes</a>
+        </nav>
+      </aside>
+
+      <article class="docs-content">
+        <header class="docs-intro"><p class="section-label">Guía de Snowtify</p><h1>Documentación</h1><p>Todo lo necesario para instalar, personalizar y recuperar Spotify desde PowerShell.</p></header>
+
+        <section class="doc-section searchable" id="install" data-search="instalación powershell windows descargar">
+          <div class="section-heading"><span>01</span><div><h2>Instalación</h2><p>Ejecuta PowerShell como usuario normal.</p></div></div>
+          <div class="code-block"><div class="code-title"><span>PowerShell</span><button type="button" data-copy-target="install-code"><i data-lucide="copy"></i> Copiar</button></div><pre><code id="install-code">iwr -useb https://raw.githubusercontent.com/SnoW-099/snowtify/main/install.ps1 | iex</code></pre></div>
+          <div class="note"><i data-lucide="info"></i><p>Snowtify reutiliza <code>%APPDATA%\spicetify</code>. Tus temas, extensiones y ajustes actuales siguen disponibles.</p></div>
+        </section>
+
+        <section class="doc-section searchable" id="first-run" data-search="primera ejecución backup apply spotify">
+          <div class="section-heading"><span>02</span><div><h2>Primera ejecución</h2><p>Crea una copia limpia y aplica tu personalización.</p></div></div>
+          <div class="code-block compact"><pre><code id="first-code">snowtify backup apply</code></pre><button class="floating-copy" type="button" data-copy-target="first-code" aria-label="Copiar comando"><i data-lucide="copy"></i></button></div>
+        </section>
+
+        <section class="doc-section searchable" id="repair" data-search="reparar repair bug actualización desaparece spotify">
+          <div class="section-heading"><span>03</span><div><h2>Reparar Snowtify</h2><p>Recupera la personalización cuando Spotify se actualiza o arranca mal.</p></div></div>
+          <div class="code-block compact accent"><pre><code id="repair-code">snowtify repair</code></pre><button class="floating-copy" type="button" data-copy-target="repair-code" aria-label="Copiar comando"><i data-lucide="copy"></i></button></div>
+        </section>
+
+        <section class="doc-section searchable" id="update" data-search="actualizar update versión release">
+          <div class="section-heading"><span>04</span><div><h2>Actualizar</h2><p>Descarga la última versión del canal independiente de Snowtify.</p></div></div>
+          <div class="code-block compact"><pre><code id="update-code">snowtify update</code></pre><button class="floating-copy" type="button" data-copy-target="update-code" aria-label="Copiar comando"><i data-lucide="copy"></i></button></div>
+        </section>
+
+        <section class="doc-section searchable" id="marketplace" data-search="marketplace temas extensiones compatible">
+          <div class="section-heading"><span>05</span><div><h2>Marketplace</h2><p>Instala temas y extensiones comunitarias desde Spotify.</p></div></div>
+          <p>Snowtify mantiene la API interna <code>Spicetify.*</code> y el alias de compatibilidad que Marketplace necesita.</p>
+        </section>
+
+        <section class="doc-section searchable" id="commands" data-search="comandos config apply restore repair update">
+          <div class="section-heading"><span>06</span><div><h2>Comandos esenciales</h2><p>La referencia rápida para el uso diario.</p></div></div>
+          <div class="command-table" role="table" aria-label="Comandos de Snowtify">
+            <div class="table-row table-head" role="row"><span>Comando</span><span>Uso</span></div>
+            <div class="table-row" role="row"><code>snowtify apply</code><span>Aplica la configuración actual.</span></div>
+            <div class="table-row" role="row"><code>snowtify repair</code><span>Repara y reaplica tras una actualización.</span></div>
+            <div class="table-row" role="row"><code>snowtify update</code><span>Actualiza Snowtify.</span></div>
+            <div class="table-row" role="row"><code>snowtify restore</code><span>Devuelve Spotify a su estado original.</span></div>
+            <div class="table-row" role="row"><code>snowtify config</code><span>Muestra o modifica la configuración.</span></div>
+          </div>
+        </section>
+
+        <section class="doc-section searchable" id="faq" data-search="problemas pantalla negra bug no aparece">
+          <div class="section-heading"><span>07</span><div><h2>Problemas comunes</h2><p>Soluciones rápidas antes de abrir una incidencia.</p></div></div>
+          <details><summary>Snowtify desapareció después de actualizar Spotify</summary><p>Ejecuta <code>snowtify repair</code>. Si Spotify cambió demasiado, actualiza primero con <code>snowtify update</code>.</p></details>
+          <details><summary>Spotify abre con la interfaz bloqueada</summary><p>Desactiva temporalmente el último tema o extensión y ejecuta <code>snowtify apply</code>.</p></details>
+        </section>
+        <div class="no-results" hidden><i data-lucide="search-x"></i><p>No encontramos esa parte de la guía.</p></div>
+      </article>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"><i data-lucide="check"></i> Copiado</div>
+  </body>
+</html>

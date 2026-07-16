@@ -11,8 +11,10 @@ function renderIcons() {
 function setTheme(theme) {
   root.classList.toggle("light", theme === "light");
   localStorage.setItem("snowtify-theme", theme);
-  themeToggle.innerHTML = `<i data-lucide="${theme === "light" ? "moon" : "sun"}"></i>`;
-  themeToggle.setAttribute("aria-label", theme === "light" ? "Usar tema oscuro" : "Usar tema claro");
+  if (themeToggle) {
+    themeToggle.innerHTML = `<i data-lucide="${theme === "light" ? "moon" : "sun"}"></i>`;
+    themeToggle.setAttribute("aria-label", theme === "light" ? "Usar tema oscuro" : "Usar tema claro");
+  }
   renderIcons();
 }
 
@@ -20,8 +22,10 @@ async function copyText(targetId) {
   const target = document.getElementById(targetId);
   if (!target) return;
   await navigator.clipboard.writeText(target.textContent.trim());
-  toast.classList.add("show");
-  window.setTimeout(() => toast.classList.remove("show"), 1600);
+  if (toast) {
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
 }
 
 document.addEventListener("click", (event) => {
@@ -29,11 +33,9 @@ document.addEventListener("click", (event) => {
   if (copyButton) copyText(copyButton.dataset.copyTarget);
 });
 
-themeToggle.addEventListener("click", () => {
-  setTheme(root.classList.contains("light") ? "dark" : "light");
-});
+themeToggle?.addEventListener("click", () => setTheme(root.classList.contains("light") ? "dark" : "light"));
 
-searchInput.addEventListener("input", () => {
+searchInput?.addEventListener("input", () => {
   const query = searchInput.value.trim().toLocaleLowerCase("es");
   let visible = 0;
   sections.forEach((section) => {
@@ -42,20 +44,18 @@ searchInput.addEventListener("input", () => {
     section.hidden = !match;
     if (match) visible += 1;
   });
-  document.querySelector(".no-results").hidden = visible !== 0;
+  const emptyState = document.querySelector(".no-results");
+  if (emptyState) emptyState.hidden = visible !== 0;
 });
 
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
+if (sections.length) {
+  const observer = new IntersectionObserver((entries) => {
     const visible = entries.find((entry) => entry.isIntersecting);
     if (!visible) return;
-    document.querySelectorAll(".sidebar nav a").forEach((link) => {
-      link.classList.toggle("active", link.hash === `#${visible.target.id}`);
-    });
-  },
-  { rootMargin: "-15% 0px -70%", threshold: 0 },
-);
+    document.querySelectorAll(".docs-sidebar nav a").forEach((link) => link.classList.toggle("active", link.hash === `#${visible.target.id}`));
+  }, { rootMargin: "-15% 0px -70%", threshold: 0 });
+  sections.forEach((section) => observer.observe(section));
+}
 
-sections.forEach((section) => sectionObserver.observe(section));
 setTheme(localStorage.getItem("snowtify-theme") || "dark");
 window.addEventListener("load", renderIcons);
