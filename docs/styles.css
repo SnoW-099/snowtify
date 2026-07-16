@@ -240,8 +240,8 @@ details p { padding: 0 4px 18px; color: var(--muted); }
   .hero-description { font-size: 16px; }
   .hero-actions { align-items: stretch; flex-direction: column; }
   .primary-button, .secondary-button { width: 100%; }
-  .install-pill { height: 48px; }
-  .install-pill code { font-size: 10px; }
+  .install-pill { min-height: 64px; height: auto; padding-block: 9px; }
+  .install-pill code { overflow-wrap: anywhere; font-size: 10px; line-height: 1.35; text-overflow: clip; white-space: normal; }
   .product-stage { width: calc(100% + 18px); aspect-ratio: 1.45 / 1; margin-top: 34px; border-radius: 8px 0 0 0; }
   .product-stage img { object-position: 12% top; }
   .product-facts { grid-template-columns: repeat(2, 1fr); margin-inline: 18px; }
