@@ -38,8 +38,9 @@
       <article class="docs-content">
         <header class="docs-intro"><p class="section-label">Snowtify guide</p><h1>Documentation</h1><p>Everything you need to install, customize, and restore Spotify from PowerShell.</p></header>
 
-        <section class="doc-section searchable" id="install" data-search="installation powershell windows download">
+        <section class="doc-section searchable" id="install" data-search="installation powershell windows download requirements spotify website microsoft store administrator">
           <div class="section-heading"><span>01</span><div><h2>Installation</h2><p>Run PowerShell as a standard user.</p></div></div>
+          <div class="note"><i data-lucide="monitor-down"></i><p><strong>Before you install:</strong> Use the desktop version of Spotify downloaded from <a href="https://www.spotify.com/download/windows/" target="_blank" rel="noreferrer">spotify.com</a>, not the Microsoft Store package. Open PowerShell as a standard user, not as administrator.</p></div>
           <div class="code-block"><div class="code-title"><span>PowerShell</span><button type="button" data-copy-target="install-code"><i data-lucide="copy"></i> Copy</button></div><pre><code id="install-code">iwr -useb https://raw.githubusercontent.com/SnoW-099/snowtify/main/install.ps1 | iex</code></pre></div>
           <div class="note"><i data-lucide="info"></i><p>Snowtify reuses <code>%APPDATA%\spicetify</code>. Your existing themes, extensions, and settings remain available.</p></div>
         </section>
@@ -66,10 +67,11 @@
           <p>Snowtify preserves the internal <code>Spicetify.*</code> API and the compatibility alias required by Marketplace. The default <strong>Snowtify Frost</strong> theme appears under <strong>Marketplace &gt; Installed</strong>, where you can remove it or replace it with any Marketplace theme.</p>
         </section>
 
-        <section class="doc-section searchable" id="commands" data-search="commands config apply restore repair update">
+        <section class="doc-section searchable" id="commands" data-search="commands config apply restore repair update version">
           <div class="section-heading"><span>06</span><div><h2>Essential commands</h2><p>A quick reference for everyday use.</p></div></div>
           <div class="command-table" role="table" aria-label="Snowtify commands">
             <div class="table-row table-head" role="row"><span>Command</span><span>Purpose</span></div>
+            <div class="table-row" role="row"><code>snowtify --version</code><span>Shows the installed Snowtify version.</span></div>
             <div class="table-row" role="row"><code>snowtify apply</code><span>Applies the current configuration.</span></div>
             <div class="table-row" role="row"><code>snowtify repair</code><span>Repairs and reapplies after an update.</span></div>
             <div class="table-row" role="row"><code>snowtify update</code><span>Updates Snowtify in place and preserves your setup.</span></div>
@@ -82,6 +84,7 @@
           <div class="section-heading"><span>07</span><div><h2>Troubleshooting</h2><p>Quick fixes to try before asking for help.</p></div></div>
           <details><summary>Snowtify disappeared after Spotify updated</summary><p>Run <code>snowtify repair</code>. If Spotify changed significantly, run <code>snowtify update</code> first.</p></details>
           <details><summary>Spotify opens with a frozen interface</summary><p>Temporarily disable the latest theme or extension you installed, then run <code>snowtify apply</code>.</p></details>
+          <details><summary>PowerShell cannot find the snowtify command</summary><p>Close PowerShell and open it again so Windows reloads your user PATH, then run <code>snowtify --version</code>.</p></details>
         </section>
 
         <section class="doc-section searchable uninstall-section" id="uninstall" data-search="uninstall remove delete restore cleanup powershell">
