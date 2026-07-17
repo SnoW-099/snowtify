@@ -29,7 +29,7 @@
         <label class="search-box" for="docs-search"><i data-lucide="search"></i><input id="docs-search" type="search" placeholder="Search" autocomplete="off" /></label>
         <nav aria-label="Documentation index">
           <p>Getting started</p><a class="active" href="#install">Installation</a><a href="#first-run">First run</a>
-          <p>Maintenance</p><a href="#repair">Repair</a><a href="#update">Update</a><a href="#marketplace">Marketplace</a>
+          <p>Maintenance</p><a href="#repair">Repair</a><a href="#update">Update</a><a href="#marketplace">Marketplace</a><a href="#control-center">Snowtify in Spotify</a>
           <p>Reference</p><a href="#commands">Commands</a><a href="#faq">Troubleshooting</a>
           <p>Removal</p><a class="danger-link" href="#uninstall">Uninstall Snowtify</a>
         </nav>
@@ -66,8 +66,14 @@
           <p>Snowtify preserves the internal <code>Spicetify.*</code> API and the compatibility alias required by Marketplace. The default <strong>Snowtify Frost</strong> theme appears under <strong>Marketplace &gt; Installed</strong>, where you can remove it or replace it with any Marketplace theme.</p>
         </section>
 
+        <section class="doc-section searchable" id="control-center" data-search="snowtify spotify control center version repository release feedback email">
+          <div class="section-heading"><span>06</span><div><h2>Snowtify in Spotify</h2><p>Check the project status and send feedback without leaving Spotify.</p></div></div>
+          <p>After installing or updating, <strong>Snowtify</strong> appears next to Marketplace. The control center shows your installed version, checks the latest GitHub release, and links directly to the public repository and changelog.</p>
+          <div class="note"><i data-lucide="message-square"></i><p>The feedback form opens your default email app with Snowtify and Spotify version details already included. Nothing is sent until you review the message and press Send.</p></div>
+        </section>
+
         <section class="doc-section searchable" id="commands" data-search="commands config apply restore repair update">
-          <div class="section-heading"><span>06</span><div><h2>Essential commands</h2><p>A quick reference for everyday use.</p></div></div>
+          <div class="section-heading"><span>07</span><div><h2>Essential commands</h2><p>A quick reference for everyday use.</p></div></div>
           <div class="command-table" role="table" aria-label="Snowtify commands">
             <div class="table-row table-head" role="row"><span>Command</span><span>Purpose</span></div>
             <div class="table-row" role="row"><code>snowtify apply</code><span>Applies the current configuration.</span></div>
@@ -79,13 +85,13 @@
         </section>
 
         <section class="doc-section searchable" id="faq" data-search="troubleshooting black screen bug missing">
-          <div class="section-heading"><span>07</span><div><h2>Troubleshooting</h2><p>Quick fixes to try before opening an issue.</p></div></div>
+          <div class="section-heading"><span>08</span><div><h2>Troubleshooting</h2><p>Quick fixes to try before sending feedback.</p></div></div>
           <details><summary>Snowtify disappeared after Spotify updated</summary><p>Run <code>snowtify repair</code>. If Spotify changed significantly, run <code>snowtify update</code> first.</p></details>
           <details><summary>Spotify opens with a frozen interface</summary><p>Temporarily disable the latest theme or extension you installed, then run <code>snowtify apply</code>.</p></details>
         </section>
 
         <section class="doc-section searchable uninstall-section" id="uninstall" data-search="uninstall remove delete restore cleanup powershell">
-          <div class="section-heading"><span>08</span><div><h2>Uninstall Snowtify</h2><p>Restore Spotify and remove Snowtify safely.</p></div></div>
+          <div class="section-heading"><span>09</span><div><h2>Uninstall Snowtify</h2><p>Restore Spotify and remove Snowtify safely.</p></div></div>
           <div class="uninstall-warning">
             <i data-lucide="triangle-alert"></i>
             <div><strong>Run this only if you want to remove Snowtify.</strong><p>The official uninstaller restores Spotify before deleting any Snowtify files.</p></div>
