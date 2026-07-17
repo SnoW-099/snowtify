@@ -29,7 +29,7 @@
         <label class="search-box" for="docs-search"><i data-lucide="search"></i><input id="docs-search" type="search" placeholder="Search" autocomplete="off" /></label>
         <nav aria-label="Documentation index">
           <p>Getting started</p><a class="active" href="#install">Installation</a><a href="#first-run">First run</a>
-          <p>Maintenance</p><a href="#repair">Repair</a><a href="#update">Update</a><a href="#marketplace">Marketplace</a>
+          <p>Maintenance</p><a href="#repair">Diagnostics &amp; repair</a><a href="#update">Update</a><a href="#marketplace">Marketplace</a>
           <p>Reference</p><a href="#commands">Commands</a><a href="#faq">Troubleshooting</a>
           <p>Removal</p><a class="danger-link" href="#uninstall">Uninstall Snowtify</a>
         </nav>
@@ -50,16 +50,22 @@
           <div class="code-block compact"><pre><code id="first-code">snowtify backup apply</code></pre><button class="floating-copy" type="button" data-copy-target="first-code" aria-label="Copy command"><i data-lucide="copy"></i></button></div>
         </section>
 
-        <section class="doc-section searchable" id="repair" data-search="repair bug update missing spotify">
-          <div class="section-heading"><span>03</span><div><h2>Repair Snowtify</h2><p>Restore your customization when Spotify updates or fails to start correctly.</p></div></div>
-          <div class="code-block compact accent"><pre><code id="repair-code">snowtify repair</code></pre><button class="floating-copy" type="button" data-copy-target="repair-code" aria-label="Copy command"><i data-lucide="copy"></i></button></div>
+        <section class="doc-section searchable" id="repair" data-search="doctor repair logs diagnostic bug update missing spotify">
+          <div class="section-heading"><span>03</span><div><h2>Diagnostics &amp; repair</h2><p>Inspect the installation, recover customization, and review the latest result.</p></div></div>
+          <div class="command-table" role="table" aria-label="Snowtify maintenance commands">
+            <div class="table-row table-head" role="row"><span>Command</span><span>Purpose</span></div>
+            <div class="table-row" role="row"><code>snowtify doctor</code><span>Checks Spotify paths, backup state, theme, extensions, and custom apps without changing anything.</span></div>
+            <div class="table-row" role="row"><code>snowtify repair</code><span>Rebuilds what is needed and reapplies the current customization.</span></div>
+            <div class="table-row" role="row"><code>snowtify logs</code><span>Shows the latest diagnostic and repair report.</span></div>
+          </div>
+          <div class="note"><i data-lucide="stethoscope"></i><p>Start with <code>snowtify doctor</code>. When it reports a recoverable Spotify update or missing customization, run <code>snowtify repair</code>.</p></div>
         </section>
 
         <section class="doc-section searchable" id="update" data-search="update version release reinstall uninstall">
           <div class="section-heading"><span>04</span><div><h2>Update</h2><p>Update Snowtify in place without uninstalling, reinstalling, or losing your configuration.</p></div></div>
           <div class="code-block compact"><pre><code id="update-code">snowtify update</code></pre><button class="floating-copy" type="button" data-copy-target="update-code" aria-label="Copy command"><i data-lucide="copy"></i></button></div>
           <div class="note"><i data-lucide="refresh-cw"></i><p>The updater downloads the latest Snowtify release, preserves your setup, and reapplies it to Spotify automatically.</p></div>
-          <p>Spotify shows a one-time notification and a top-bar update button only when a newer Snowtify version is available.</p>
+          <p>When a newer Snowtify version is available, Spotify opens the update panel at startup and keeps a Snowtify button in the top bar. Nothing is shown while your installation is current.</p>
         </section>
 
         <section class="doc-section searchable" id="marketplace" data-search="marketplace themes extensions compatible frost installed remove replace">
@@ -67,13 +73,15 @@
           <p>Snowtify preserves the internal <code>Spicetify.*</code> API and the compatibility alias required by Marketplace. The default <strong>Snowtify Frost</strong> theme appears under <strong>Marketplace &gt; Installed</strong>, where you can remove it or replace it with any Marketplace theme.</p>
         </section>
 
-        <section class="doc-section searchable" id="commands" data-search="commands config apply restore repair update version">
+        <section class="doc-section searchable" id="commands" data-search="commands config apply restore doctor repair logs update version">
           <div class="section-heading"><span>06</span><div><h2>Essential commands</h2><p>A quick reference for everyday use.</p></div></div>
           <div class="command-table" role="table" aria-label="Snowtify commands">
             <div class="table-row table-head" role="row"><span>Command</span><span>Purpose</span></div>
             <div class="table-row" role="row"><code>snowtify --version</code><span>Shows the installed Snowtify version.</span></div>
+            <div class="table-row" role="row"><code>snowtify doctor</code><span>Checks the complete installation without changing it.</span></div>
             <div class="table-row" role="row"><code>snowtify apply</code><span>Applies the current configuration.</span></div>
-            <div class="table-row" role="row"><code>snowtify repair</code><span>Repairs and reapplies after an update.</span></div>
+            <div class="table-row" role="row"><code>snowtify repair</code><span>Repairs and reapplies after an update or startup issue.</span></div>
+            <div class="table-row" role="row"><code>snowtify logs</code><span>Displays the latest maintenance report.</span></div>
             <div class="table-row" role="row"><code>snowtify update</code><span>Updates Snowtify in place and preserves your setup.</span></div>
             <div class="table-row" role="row"><code>snowtify restore</code><span>Restores Spotify to its original state.</span></div>
             <div class="table-row" role="row"><code>snowtify config</code><span>Displays or changes the configuration.</span></div>
@@ -82,8 +90,9 @@
 
         <section class="doc-section searchable" id="faq" data-search="troubleshooting black screen bug missing">
           <div class="section-heading"><span>07</span><div><h2>Troubleshooting</h2><p>Quick fixes to try before asking for help.</p></div></div>
-          <details><summary>Snowtify disappeared after Spotify updated</summary><p>Run <code>snowtify repair</code>. If Spotify changed significantly, run <code>snowtify update</code> first.</p></details>
-          <details><summary>Spotify opens with a frozen interface</summary><p>Temporarily disable the latest theme or extension you installed, then run <code>snowtify apply</code>.</p></details>
+          <details><summary>Snowtify disappeared after Spotify updated</summary><p>Run <code>snowtify doctor</code>, followed by <code>snowtify repair</code>. If Spotify changed significantly, run <code>snowtify update</code> first.</p></details>
+          <details><summary>Spotify opens with a frozen interface</summary><p>Run <code>snowtify doctor</code> to find missing components. Temporarily disable the latest theme or extension you installed, then run <code>snowtify repair</code>.</p></details>
+          <details><summary>I need to share a diagnostic report</summary><p>Run <code>snowtify doctor</code> and then <code>snowtify logs</code>. The latter prints the saved report and its file path.</p></details>
           <details><summary>PowerShell cannot find the snowtify command</summary><p>Close PowerShell and open it again so Windows reloads your user PATH, then run <code>snowtify --version</code>.</p></details>
         </section>
 
