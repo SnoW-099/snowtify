@@ -1,5 +1,0 @@
-{
-	"name": "Snowtify",
-	"icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2v20M4.22 6.5l15.56 11M4.22 17.5l15.56-11M9 3.8l3 2 3-2M9 20.2l3-2 3 2M4.4 9.5l.2 3.6-3.2 1.6M22.6 9.3l-3.2 1.6.2 3.6M4.4 14.5l.2-3.6-3.2-1.6M22.6 14.7l-3.2-1.6.2-3.6\"/></svg>",
-	"active-icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2v20M4.22 6.5l15.56 11M4.22 17.5l15.56-11M9 3.8l3 2 3-2M9 20.2l3-2 3 2M4.4 9.5l.2 3.6-3.2 1.6M22.6 9.3l-3.2 1.6.2 3.6M4.4 14.5l.2-3.6-3.2-1.6M22.6 14.7l-3.2-1.6.2-3.6\"/></svg>"
-}

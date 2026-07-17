@@ -142,7 +142,7 @@ func init() {
 	if _, err := cmd.MigrateSnowtifyFrost(); err != nil {
 		utils.PrintWarning(err.Error())
 	}
-	if _, err := cmd.EnsureSnowtifyApp(); err != nil {
+	if _, err := cmd.RemoveSnowtifyApp(); err != nil {
 		utils.PrintWarning(err.Error())
 	}
 

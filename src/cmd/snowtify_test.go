@@ -80,32 +80,32 @@ func TestMigrateSnowtifyFrostConfigHandlesEmptyExtensions(t *testing.T) {
 	assertConfigValue(t, features, "extensions", "snowtify-frost.js")
 }
 
-func TestEnsureConfigListValueAddsSnowtifyAfterMarketplace(t *testing.T) {
+func TestRemoveConfigListValueRemovesSnowtifyOnly(t *testing.T) {
 	_, features := newFrostTestSections(t)
-	features.Key("custom_apps").SetValue("marketplace")
+	features.Key("custom_apps").SetValue("marketplace|snowtify|reddit")
 
-	if !ensureConfigListValue(features, "custom_apps", "snowtify") {
-		t.Fatal("expected Snowtify custom app to be added")
+	if !removeConfigListValue(features, "custom_apps", "snowtify") {
+		t.Fatal("expected Snowtify custom app to be removed")
 	}
-	assertConfigValue(t, features, "custom_apps", "marketplace|snowtify")
+	assertConfigValue(t, features, "custom_apps", "marketplace|reddit")
 }
 
-func TestEnsureConfigListValueDoesNotDuplicateSnowtify(t *testing.T) {
+func TestRemoveConfigListValueMatchesCase(t *testing.T) {
 	_, features := newFrostTestSections(t)
 	features.Key("custom_apps").SetValue("marketplace|Snowtify")
 
-	if ensureConfigListValue(features, "custom_apps", "snowtify") {
-		t.Fatal("expected existing Snowtify custom app to remain unchanged")
+	if !removeConfigListValue(features, "custom_apps", "snowtify") {
+		t.Fatal("expected Snowtify custom app to be removed case-insensitively")
 	}
-	assertConfigValue(t, features, "custom_apps", "marketplace|Snowtify")
+	assertConfigValue(t, features, "custom_apps", "marketplace")
 }
 
-func TestEnsureConfigListValueHandlesEmptyConfig(t *testing.T) {
+func TestRemoveConfigListValueLeavesOtherAppsAlone(t *testing.T) {
 	_, features := newFrostTestSections(t)
-	features.Key("custom_apps").SetValue("")
+	features.Key("custom_apps").SetValue("marketplace|reddit")
 
-	if !ensureConfigListValue(features, "custom_apps", "snowtify") {
-		t.Fatal("expected Snowtify custom app to be added")
+	if removeConfigListValue(features, "custom_apps", "snowtify") {
+		t.Fatal("expected unrelated custom apps to remain unchanged")
 	}
-	assertConfigValue(t, features, "custom_apps", "snowtify")
+	assertConfigValue(t, features, "custom_apps", "marketplace|reddit")
 }

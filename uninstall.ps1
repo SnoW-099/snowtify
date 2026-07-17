@@ -21,7 +21,6 @@ if (Test-Path -LiteralPath $snowtifyExecutablePath -PathType 'Leaf') {
   }
 
   & $snowtifyExecutablePath config extensions snowtify-frost.js- | Out-Null
-  & $snowtifyExecutablePath config custom_apps snowtify- | Out-Null
 }
 else {
   Write-Host -Object 'Snowtify executable was not found; continuing with cleanup.' -ForegroundColor 'Yellow'
