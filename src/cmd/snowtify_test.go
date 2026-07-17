@@ -79,3 +79,33 @@ func TestMigrateSnowtifyFrostConfigHandlesEmptyExtensions(t *testing.T) {
 	}
 	assertConfigValue(t, features, "extensions", "snowtify-frost.js")
 }
+
+func TestEnsureConfigListValueAddsSnowtifyAfterMarketplace(t *testing.T) {
+	_, features := newFrostTestSections(t)
+	features.Key("custom_apps").SetValue("marketplace")
+
+	if !ensureConfigListValue(features, "custom_apps", "snowtify") {
+		t.Fatal("expected Snowtify custom app to be added")
+	}
+	assertConfigValue(t, features, "custom_apps", "marketplace|snowtify")
+}
+
+func TestEnsureConfigListValueDoesNotDuplicateSnowtify(t *testing.T) {
+	_, features := newFrostTestSections(t)
+	features.Key("custom_apps").SetValue("marketplace|Snowtify")
+
+	if ensureConfigListValue(features, "custom_apps", "snowtify") {
+		t.Fatal("expected existing Snowtify custom app to remain unchanged")
+	}
+	assertConfigValue(t, features, "custom_apps", "marketplace|Snowtify")
+}
+
+func TestEnsureConfigListValueHandlesEmptyConfig(t *testing.T) {
+	_, features := newFrostTestSections(t)
+	features.Key("custom_apps").SetValue("")
+
+	if !ensureConfigListValue(features, "custom_apps", "snowtify") {
+		t.Fatal("expected Snowtify custom app to be added")
+	}
+	assertConfigValue(t, features, "custom_apps", "snowtify")
+}

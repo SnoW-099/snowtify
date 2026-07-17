@@ -13,8 +13,8 @@ It customizes the official Spotify desktop client on Windows, macOS, and Linux w
 - A clearer `snowtify repair` command for recovering customization after Spotify updates.
 - The official `Snowtify Frost` theme is installed by default and managed from Marketplace's **Installed** tab, where it can be removed or replaced like any other theme.
 - Spotify shows a one-time Snowtify notification and update button only when a newer release is available.
+- A built-in Snowtify control center shows the installed version, links to the public repository and releases, and opens a prefilled feedback email.
 - A compatibility-first approach so upstream Spicetify improvements can still be merged.
-- Upcoming startup diagnostics for themes and extensions that fail intermittently.
 
 ## Install on Windows
 
@@ -48,7 +48,7 @@ The Snowtify website lives in the `codex/website` branch and is deployed through
 
 Snowtify intentionally keeps the internal `Spicetify` JavaScript API and existing configuration layout. Renaming those interfaces would break community themes and extensions.
 
-Until Snowtify publishes its first release, use the upstream [installation](https://spicetify.app/docs/getting-started) and [usage documentation](https://spicetify.app/docs/getting-started#basic-usage) for the shared commands.
+Snowtify releases are published on [GitHub](https://github.com/SnoW-099/snowtify/releases). For shared Spicetify commands, the upstream [usage documentation](https://spicetify.app/docs/getting-started#basic-usage) remains a useful reference.
 
 ## Upstream
 

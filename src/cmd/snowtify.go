@@ -4,13 +4,76 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 
 	"github.com/go-ini/ini"
 	"github.com/spicetify/cli/src/utils"
 )
 
-const snowtifyFrostBootstrap = "snowtify-frost.js"
+const (
+	snowtifyFrostBootstrap = "snowtify-frost.js"
+	snowtifyCustomApp      = "snowtify"
+	snowtifyAppMarker      = ".snowtify-app-v1"
+)
+
+// EnsureSnowtifyApp enables the bundled control center once. The marker lets
+// users remove it later without Snowtify adding it back on every command.
+func EnsureSnowtifyApp() (bool, error) {
+	markerPath := filepath.Join(spicetifyFolder, snowtifyAppMarker)
+	if _, err := os.Stat(markerPath); err == nil {
+		return false, nil
+	} else if !os.IsNotExist(err) {
+		return false, fmt.Errorf("failed to inspect Snowtify app state: %w", err)
+	}
+
+	appPath := filepath.Join(utils.GetExecutableDir(), "CustomApps", snowtifyCustomApp)
+	if !directoryExists(appPath) {
+		return false, nil
+	}
+
+	changed := ensureConfigListValue(featureSection, "custom_apps", snowtifyCustomApp)
+	if changed {
+		if err := cfg.Write(); err != nil {
+			return false, fmt.Errorf("failed to enable Snowtify app: %w", err)
+		}
+	}
+
+	if err := os.WriteFile(markerPath, []byte("Snowtify control center migration completed\n"), 0600); err != nil {
+		return changed, fmt.Errorf("failed to save Snowtify app state: %w", err)
+	}
+
+	if changed {
+		utils.PrintSuccess("Enabled Snowtify control center")
+	}
+	return changed, nil
+}
+
+func ensureConfigListValue(section *ini.Section, keyName, value string) bool {
+	values := section.Key(keyName).Strings("|")
+	cleanValues := make([]string, 0, len(values)+1)
+	found := false
+	for _, item := range values {
+		item = strings.TrimSpace(item)
+		if item == "" {
+			continue
+		}
+		if strings.EqualFold(item, value) {
+			found = true
+		}
+		cleanValues = append(cleanValues, item)
+	}
+	if found {
+		return false
+	}
+
+	cleanValues = append(cleanValues, value)
+	sort.Slice(cleanValues, func(i, j int) bool {
+		return strings.ToLower(cleanValues[i]) < strings.ToLower(cleanValues[j])
+	})
+	section.Key(keyName).SetValue(strings.Join(cleanValues, "|"))
+	return true
+}
 
 // MigrateSnowtifyFrost moves the legacy local Frost theme to Marketplace's
 // theme runtime, allowing Marketplace themes to be installed and removed.

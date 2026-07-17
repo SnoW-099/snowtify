@@ -184,10 +184,10 @@ function Install-SnowtifyLayer {
       if (-not (Test-Path -LiteralPath $bootstrapPath -PathType 'Leaf')) {
         throw 'This Snowtify release does not include Marketplace theme integration.'
       }
-      & "$snowtifyFolderPath\snowtify.exe" config current_theme marketplace color_scheme Marketplace inject_css 1 replace_colors 1 extensions snowtify-frost.js
+      & "$snowtifyFolderPath\snowtify.exe" config current_theme marketplace color_scheme Marketplace inject_css 1 replace_colors 1 extensions snowtify-frost.js custom_apps snowtify
     }
     else {
-      & "$snowtifyFolderPath\snowtify.exe" config current_theme Snowtify color_scheme Frost inject_css 1 replace_colors 1
+      & "$snowtifyFolderPath\snowtify.exe" config current_theme Snowtify color_scheme Frost inject_css 1 replace_colors 1 custom_apps snowtify
     }
     if ($LASTEXITCODE -ne 0) {
       throw 'Snowtify could not configure the Frost visual layer.'

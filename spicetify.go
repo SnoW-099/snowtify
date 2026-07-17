@@ -142,6 +142,9 @@ func init() {
 	if _, err := cmd.MigrateSnowtifyFrost(); err != nil {
 		utils.PrintWarning(err.Error())
 	}
+	if _, err := cmd.EnsureSnowtifyApp(); err != nil {
+		utils.PrintWarning(err.Error())
+	}
 
 	if len(commands) < 1 {
 		help()
