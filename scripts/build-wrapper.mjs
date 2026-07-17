@@ -21,6 +21,7 @@ async function buildWrapper(write) {
     entryPoints: [entryFile],
     format: "iife",
     legalComments: "none",
+    loader: { ".png": "dataurl" },
     logLevel: "silent",
     minify: true,
     outfile: outputFile,

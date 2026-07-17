@@ -1,8 +1,10 @@
 import { waitFor } from "./shared/async.js";
 import { isNewerVersion } from "./shared/version.js";
+import snowtifyTopbarIcon from "./assets/snowtify-topbar-icon.png";
 
 const updateCommand = "snowtify update";
 const notificationStorageKey = "snowtify:update-notified-version";
+const updateButtonIcon = `<img src="${snowtifyTopbarIcon}" alt="" aria-hidden="true" draggable="false" style="display:block;width:24px;height:24px;object-fit:contain;pointer-events:none">`;
 
 function getReleaseHighlights(body) {
   return String(body ?? "")
@@ -119,7 +121,7 @@ void (async function checkForUpdate() {
       isLarge: false,
     };
 
-    new Spicetify.Topbar.Button("Snowtify update available", "download", () => {
+    new Spicetify.Topbar.Button("Snowtify update available", updateButtonIcon, () => {
       Spicetify.PopupModal.display(updateModal);
     });
 
