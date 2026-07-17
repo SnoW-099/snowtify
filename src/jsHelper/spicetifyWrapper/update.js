@@ -3,7 +3,6 @@ import { isNewerVersion } from "./shared/version.js";
 import snowtifyTopbarIcon from "./assets/snowtify-topbar-icon.png";
 
 const updateCommand = "snowtify update";
-const notificationStorageKey = "snowtify:update-notified-version";
 const updateButtonIcon = `<img src="${snowtifyTopbarIcon}" alt="" aria-hidden="true" draggable="false" style="display:block;width:24px;height:24px;object-fit:contain;pointer-events:none">`;
 
 function getReleaseHighlights(body) {
@@ -125,11 +124,8 @@ void (async function checkForUpdate() {
       Spicetify.PopupModal.display(updateModal);
     });
 
-    if (localStorage.getItem(notificationStorageKey) !== latestVersion) {
-      localStorage.setItem(notificationStorageKey, latestVersion);
-      const showNotification = await waitFor(() => Spicetify.showNotification, 300);
-      showNotification(`New Snowtify update available: v${latestVersion}`, false, 8000);
-    }
+    await waitFor(() => Spicetify.PopupModal?.display, 300);
+    Spicetify.PopupModal.display(updateModal);
   } catch (error) {
     console.warn("[Snowtify] Could not check for updates", error);
   }

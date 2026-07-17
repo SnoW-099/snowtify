@@ -10,9 +10,9 @@ It customizes the official Spotify desktop client on Windows, macOS, and Linux w
 
 ## Snowtify additions
 
-- A clearer `snowtify repair` command for recovering customization after Spotify updates.
+- `snowtify doctor`, `snowtify repair`, and `snowtify logs` for diagnosing and recovering customization after Spotify updates.
 - The official `Snowtify Frost` theme is installed by default and managed from Marketplace's **Installed** tab, where it can be removed or replaced like any other theme.
-- Spotify shows a one-time Snowtify notification and update button only when a newer release is available.
+- Spotify opens a Snowtify update panel at startup and shows an update button only when a newer release is available.
 - A compatibility-first approach so upstream Spicetify improvements can still be merged.
 
 ## Install on Windows
@@ -24,6 +24,14 @@ iwr -useb https://raw.githubusercontent.com/SnoW-099/snowtify/main/install.ps1 |
 ```
 
 After installation, use `snowtify -h` to see the available commands.
+
+Check the installation, repair it, or inspect the latest diagnostic log:
+
+```powershell
+snowtify doctor
+snowtify repair
+snowtify logs
+```
 
 Update Snowtify in place without uninstalling or reinstalling:
 

@@ -161,6 +161,16 @@ func main() {
 
 	// Unchainable commands
 	switch commands[0] {
+	case "doctor":
+		if !cmd.Doctor(version) {
+			os.Exit(1)
+		}
+		return
+
+	case "logs":
+		cmd.ShowSnowtifyLogs()
+		return
+
 	case "config":
 		commands = commands[1:]
 		if len(commands) == 0 {
@@ -361,8 +371,16 @@ func main() {
 		case "restart":
 			cmd.SpotifyRestart()
 
-		case "auto", "repair":
-			cmd.Auto(version)
+		case "auto":
+			if err := cmd.Auto(version); err != nil {
+				utils.Fatal(err)
+			}
+			shouldRestart = true
+
+		case "repair":
+			if err := cmd.Repair(version); err != nil {
+				utils.Fatal(err)
+			}
 			shouldRestart = true
 
 		default:
@@ -409,9 +427,14 @@ watch               Enter watch mode.
 restart             Restart Spotify client.
 
 repair              Detect a Spotify update or missing customization,
-                    rebuild the backup when needed, apply Snowtify, and restart Spotify.
+                    rebuild the backup when needed, reapply Snowtify, and restart Spotify.
 
 ` + utils.Bold("NON-CHAINABLE COMMANDS") + `
+doctor              Check Spotify paths, backup state, theme, extensions,
+                    and custom apps without changing the installation.
+
+logs                Show the latest Snowtify diagnostic and repair log.
+
 spotify-updates     Block Spotify updates by patching spotify executable.
                     Accepts "block" or "unblock" as the parameter.
 

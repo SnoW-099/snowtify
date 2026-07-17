@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"os"
+	"errors"
 
 	backupstatus "github.com/spicetify/cli/src/status/backup"
 	spotifystatus "github.com/spicetify/cli/src/status/spotify"
@@ -9,7 +9,7 @@ import (
 
 // Auto checks Spotify state, re-backup and apply if needed, then launch
 // Spotify client normally.
-func Auto(spicetifyVersion string) {
+func Auto(spicetifyVersion string) error {
 	backupVersion := backupSection.Key("version").MustString("")
 	spotStat := spotifystatus.Get(appPath)
 	backStat := backupstatus.Get(prefsPath, backupFolder, backupVersion)
@@ -21,7 +21,7 @@ func Auto(spicetifyVersion string) {
 	}
 
 	if !backStat.IsBackuped() {
-		os.Exit(1)
+		return errors.New(`Snowtify could not create a usable backup. Run "snowtify doctor" for details`)
 	}
 
 	if isAppX {
@@ -33,4 +33,6 @@ func Auto(spicetifyVersion string) {
 		InitSetting()
 		Apply(spicetifyVersion)
 	}
+
+	return nil
 }
