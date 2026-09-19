@@ -1,0 +1,35 @@
+name: Regenerate wrapper (temp)
+
+on:
+  push:
+    branches:
+      - fix/spotify-1.3.1-spicetify-2.45.1
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: fix/spotify-1.3.1-spicetify-2.45.1
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build:wrapper
+      - name: Commit generated wrapper
+        run: |
+          if git diff --quiet -- jsHelper/spicetifyWrapper.js jsHelper/spicetifyWrapper.js.map; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add jsHelper/spicetifyWrapper.js jsHelper/spicetifyWrapper.js.map
+          git commit -m "build: regenerate Spicetify wrapper"
+          git push
